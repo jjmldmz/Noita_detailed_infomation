@@ -159,7 +159,7 @@ function draw_info(x,y,info)
   else
     GuiZSet( gui, 0 )
     local line1 = info.name --name
-    local line2 = "HP:  "..string.format("%.2f",info.hp) .."/"..string.format("%.3f",info.max_hp) --detailed hp
+    local line2 = "HP:  "..string.format("%.2f",info.hp) .."/"..string.format("%.2f",info.max_hp) --detailed hp
 
     --box
 
@@ -173,19 +173,19 @@ function draw_info(x,y,info)
       x_start = x_start+12
     end
 
-    local current_y = 46
+    local current_y = 50
     if #(info.protect) == 0 then
-      current_y = 27
+      current_y = 31
     end
     GuiText( gui, x+10,y+ current_y,"Damage Multipliers:")
     current_y = current_y + 9
     for i,resistance in pairs(info.res) do
       GuiText( gui, x+15,y+ current_y,GameTextGet(res_local_key[resistance.type]))
-      GuiText( gui, x+15 + 45,y+ current_y,"x"..string.format("%.4f",resistance.value*100).."%")
+      GuiText( gui, x+15 + 55,y+ current_y,"x"..string.format("%.2f",resistance.value*100).."%")
       current_y = current_y +9
     end
     GuiZSet( gui, 0 )
-    draw_text_box(x+5,y+5,120, current_y +4)
+    draw_text_box(x+5,y+5,140, current_y +4)
   end
 end
 
