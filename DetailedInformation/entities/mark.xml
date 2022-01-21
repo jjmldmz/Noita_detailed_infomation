@@ -1,0 +1,22 @@
+<Entity  name= "mod_mark_on_enemy">
+    <SpriteComponent
+            _enabled="1"
+            _tags="enabled_with_enemy"
+            alpha="1"
+            image_file="data/projectiles_gfx/target.xml"
+            next_rect_animation=""
+            offset_x="0"
+            offset_y="0"
+            rect_animation="fireball"
+            additive="1"
+            emissive="1"
+    >
+    </SpriteComponent>
+    <LuaComponent
+            _enabled="1"
+            script_source_file="mods/DetailedInformation/scripts/mark_update_pos.lua"
+            execute_every_n_frame="1"
+    >
+    </LuaComponent>
+
+</Entity>

@@ -1,0 +1,17 @@
+<Entity  name="mod_enemy_mark_interact">
+    <InheritTransformComponent>
+    </InheritTransformComponent>
+    <InteractableComponent
+            _tags="enabled_near_enemy"
+            _enabled ="0"
+            radius="20"
+            ui_text="$interact_mark_enemy"
+            name="enemy_interact"
+    >
+    </InteractableComponent>
+    <LuaComponent
+            script_interacting="mods/mark_enemy/scripts/mark_enemy.lua"
+    >
+    </LuaComponent>
+
+</Entity>
