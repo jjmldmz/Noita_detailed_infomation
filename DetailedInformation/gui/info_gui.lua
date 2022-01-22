@@ -100,6 +100,7 @@ function get_protect(entity_id)
       end
     end
   end
+  if EntityHasTag(entity_id,"polymorphable_NOT") then protect["PROTECTION_POLYMORPH"] = true end
   return protect
 end
 
