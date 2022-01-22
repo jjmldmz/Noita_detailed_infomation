@@ -53,7 +53,7 @@ end
 function get_brief_info(creature_id)
   local info_list ={
     is_detailed_info = false,
-    name = "???",
+    name = "",
     hp = 0,
     max_hp = 0,
   }
@@ -61,11 +61,21 @@ function get_brief_info(creature_id)
     info_list.name = "Dead"
   else
     if EntityHasTag( creature_id,  "player_unit" ) then
+      --player
       info_list.name = GameTextGet("$animal_player")
     else
-      local entity_name = EntityGetName(creature_id )
-      if entity_name ~= nil then
-        info_list.name = GameTextGetTranslatedOrNot(entity_name)
+      --try stats name first
+      local stats_comp = EntityGetFirstComponentIncludingDisabled(creature_id, "GameStatsComponent" )
+      if stats_comp ~= nil then
+        info_list.name = GameTextGetTranslatedOrNot("$animal_"..ComponentGetValue2( stats_comp, "name"))
+      end
+      --try entityname
+      if info_list.name == "" then
+          info_list.name = GameTextGetTranslatedOrNot(EntityGetName(creature_id ))
+      end
+      if info_list.name == "" then
+        --default name
+        info_list.name = "An Enemy"
       end
     end
     local model_comp = EntityGetFirstComponentIncludingDisabled(creature_id, "DamageModelComponent" )
