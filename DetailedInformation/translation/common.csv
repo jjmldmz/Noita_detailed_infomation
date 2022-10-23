@@ -1,2 +1,2 @@
-interact_mark_enemy,Press $0 to mark target enemy.,Нажмите $0 для отметки противника.,,,,,,,按$0标记敌人。,,,,,
-interact_mark_delete,Press $0 to end mark.,Нажмите $0 для снятия метки с противника.,,,,,,,按$0结束标记。,,,,,
+interact_mark_enemy,Press $0 to mark target enemy.,Нажмите $0 для отметки врага.,,,,,,,按$0标记敌人。,,,,,
+interact_mark_delete,Press $0 to end mark.,Нажмите $0 для снятия метки с врага.,,,,,,,按$0结束标记。,,,,,
