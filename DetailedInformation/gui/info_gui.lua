@@ -157,7 +157,7 @@ end
 function draw_info(x,y,info)
   if info.name == "Dead" then
     draw_text_box(x+5,y+5,40, 15)
-    GuiText( gui, x+10,y+10, "Dead")
+    GuiText( gui, x+10,y+10, GameTextGet("$creature_is_dead"))
     return
   end
   if info.is_detailed_info == false then
@@ -170,7 +170,7 @@ function draw_info(x,y,info)
   else
     GuiZSet( gui, 0 )
     local line1 = info.name --name
-    local line2 = "HP:  "..string.format("%.2f",info.hp) .."/"..string.format("%.2f",info.max_hp) --detailed hp
+    local line2 = GameTextGet("$creature_hp")..":  "..string.format("%.2f",info.hp) .."/"..string.format("%.2f",info.max_hp) --detailed hp
 
     --box
 
@@ -188,7 +188,7 @@ function draw_info(x,y,info)
     if #(info.protect) == 0 then
       current_y = 31
     end
-    GuiText( gui, x+10,y+ current_y,"Damage Multipliers:")
+        GuiText( gui, x+10,y+ current_y,GameTextGet("$damage_multipliers")..":")
     current_y = current_y + 9
     for i,resistance in pairs(info.res) do
       GuiText( gui, x+15,y+ current_y,GameTextGet(res_local_key[resistance.type]))
