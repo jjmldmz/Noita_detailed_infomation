@@ -6,94 +6,94 @@ local language = GameTextGetTranslatedOrNot("$current_language")
 local translate = {
 	["key"] = {
 		english = "translated content",
-		russian = "",
+		russian = "переведённое содержимое",
 		chinese = "翻译后内容",
 	},
 
 	["select hotkey"] = {
 		english = "select hotkey",
-		russian = "",
+		russian = "горячая клавиша выбора",
 		chinese = "选择快捷键",
 	},
 	["double right click"] = {
 		english = "double right click",
-		russian = "",
+		russian = "двойной щелчок ПКМ",
 		chinese = "双击右键",
 	},
 	["right click"] = {
 		english ="right click",
-		russian = "",
+		russian = "щелчок ПКМ",
 		chinese = "单击右键",
 	},
 	["interact key('E' by default) "] = {
 		english ="interact key('E' by default) ",
-		russian = "",
+		russian = "клавиша взаимодействия (по умолчанию «E»)",
 		chinese = "互动键（默认是E键）",
 	},
 
 	["Change the hot key of selecting creatures."] = {
 		english ="Change the hot key of selecting creatures.",
-		russian = "",
+		russian = "Изменение горячей клавиши выбора существ.",
 		chinese = "改变选中敌人所用的快捷键。",
 	},
 	["brief panel enable"] = {
 		english ="brief panel enable",
-		russian = "",
+		russian = "включение панели информации",
 		chinese = "是否开启简要信息。",
 	},
 	["Enable brief information panel."] = {
 		english ="Enable this mod's brief information panel. Quick switch with a shortcut key(double right click by default)",
-		russian = "",
+		russian = "Включить панель краткой информации этого мода. Быстрое переключение с помощью клавиши быстрого доступа (двойной щелчок правой кнопкой мыши по умолчанию)",
 		chinese = "开启未选中敌人时的简要信息栏。此设置可以通过快捷键快捷切换开关状态（默认双击右键）。",
 	},
 	["brief panel hotkey"] = {
 		english ="brief panel hotkey",
-		russian = "",
+		russian = "горячая клавиша панели информации",
 		chinese = "简要信息快捷键",
 	},
 	["Change brief panel hotkey"] = {
 		english ="Change the hot key corresponding to the brief panel switch.",
-		russian = "",
+		russian = "Смена горячей клавиши, соответствующую переключению панели информации.",
 		chinese = "改变快捷切换简要信息打开状态所用的快捷。",
 	},
 	["double interact key('E' by default) "] = {
 		english ="double interact key('E' by default) ",
-		russian = "",
+		russian = "двойная клавиша взаимодействия (по умолчанию «E»)",
 		chinese = "双击互动键（默认E键）",
 	},
 	["disable the hot key"] = {
 		english ="disable the hot key",
-		russian = "",
+		russian = "отключение горячей клавиши",
 		chinese = "取消这个快捷键",
 	},
 	["percentage value"] = {
 		english ="percentage value",
-		russian = "",
+		russian = "процентное значение",
 		chinese = "百分号",
 	},
 	["Displays as percentage"] = {
 		english ="Displays damage multiplier values as a percentage. If off, the damage multiplier value will be displayed as a decimal.",
-		russian = "",
+		russian = "Отображает значения множителя урона в процентах. Если выключено, значение множителя урона будет отображаться в десятичном виде.",
 		chinese = "是否以百分比显示伤害有效系数。关闭时，会以小数显示。",
 	},
 	["multiplication symbol"] = {
 		english ="multiplication symbol",
-		russian = "",
+		russian = "символ множителя",
 		chinese = "显示乘号",
 	},
 	["Use multiplication symbol"] = {
 		english ="Use multiplication symbol",
-		russian = "",
+		russian = "Использовать символ множителя",
 		chinese = "是否在有效系数前加入乘号。",
 	},
 	["decimal places"] = {
 		english ="decimal places",
-		russian = "",
+		russian = "десятичные знаки",
 		chinese = "显示位数",
 	},
 	["Number of digits"] = {
 		english ="Number of digits after decimal point",
-		russian = "",
+		russian = "Количество цифр после десятичной точки",
 		chinese = "小数点后显示几位。",
 	},
 }
