@@ -1,5 +1,9 @@
 <Mod
 	name="Creature Detailed Information"
-	description="Double click the right button to quickly open and close the information panel."
+	description="Show you more detailed information about creatures (including yourself).including health, resistance and protection
+
+Hover the mouse over the creature to display brief health information, and Right click to display detailed information. If the panel blocks your view, you can double-click the right click to quickly turn this function on or off.
+
+and, this idea was put forward by Veum on discord. I don't have his steam account yet, so I can't add him to the co authors for the time being."
 > 
 </Mod>
