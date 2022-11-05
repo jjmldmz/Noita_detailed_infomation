@@ -1,5 +1,5 @@
-interact_mark_enemy,Press $0 to mark target enemy.,$0 для отметки врага.,,,,,,,按$0标记敌人。,,,,,
-interact_mark_delete,Press $0 to end mark.,$0 для снятия метки с врага.,,,,,,,按$0结束标记。,,,,,
+interact_mark_enemy,Press $0 to mark target enemy.,Нажмите $0 для отметки существа.,,,,,,,按$0标记敌人。,,,,,
+interact_mark_delete,Press $0 to end mark.,Нажмите $0 для снятия метки.,,,,,,,按$0结束标记。,,,,,
 creature_hp,HP,ОЗ,,,,,,,生命值,,,,,
 creature_is_dead,dead,Мёртв,,,,,,,已死亡,,,,,
 damage_multipliers,Damage Multipliers,Множители урона,,,,,,,受伤倍率,,,,,
