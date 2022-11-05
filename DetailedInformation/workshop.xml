@@ -1,0 +1,9 @@
+<Mod
+		name="Detailed Information"
+		description="Show you more detailed information about creatures."
+	request_no_api_restrictions="0"
+	tags="quality of life"
+	dont_upload_folders=""
+	dont_upload_files=""
+> 
+</Mod>

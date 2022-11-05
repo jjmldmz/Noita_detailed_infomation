@@ -1,5 +1,13 @@
 dofile( "data/scripts/lib/utilities.lua" )
 local created_gui = false
+
+local res_number_format="%.2f"
+res_decimal= math.floor(tonumber(ModSettingGet("DetailedInformation.decimal_places"))+0.5)
+print("res number format: "..tostring(res_decimal))
+if res_decimal then
+  res_number_format="%."..tostring(res_decimal).."f"
+end
+
 local res_list = {"curse","drill","electricity","explosion","fire","healing","ice","melee","overeating","physics_hit","poison","projectile","radioactive","slice"}
 local res_local_key = {["curse"] = "$inventory_mod_damage_curse",
                        ["drill"] = "$damage_drill",
@@ -34,19 +42,19 @@ else
   print("Reloading onto existing GUI")
 end
 local gui = _info_gui
-function draw_text_box(x, y, width, height, id_start)
+function draw_text_box_info(x, y, width, height, id_start)
   GuiZSet( gui, 0.22 )
   if width ==0 or height == 0 then return end
   if id_start == nil then id_start = 37894 end
-  GuiImage( gui, id_start, x,y, "mods/Equipment/ui_gfx/text_background.png", 1,width/20, height/20)
+  GuiImage( gui, id_start, x,y, "mods/DetailedInformation/gui/text_background.png", 1,width/20, height/20)
 
   GuiZSet( gui, 0.2 )
-  GuiImage( gui, id_start+1, x,y, "mods/Equipment/ui_gfx/text_board.png", 1,width,1)
-  GuiImage( gui, id_start+3, x,y, "mods/Equipment/ui_gfx/text_board.png", 1,1,height)
-  GuiImage( gui, id_start+2, x+1,y+height, "mods/Equipment/ui_gfx/text_board.png", 1,width,1)
-  GuiImage( gui, id_start+4, x+width,y+1, "mods/Equipment/ui_gfx/text_board.png", 1,1,height)
-  GuiImage( gui, id_start+5, x,y+height, "mods/Equipment/ui_gfx/text_corner.png", 1,1)
-  GuiImage( gui, id_start+6, x+width,y, "mods/Equipment/ui_gfx/text_corner.png", 1,1)
+  GuiImage( gui, id_start+1, x,y, "mods/DetailedInformation/gui/text_board.png", 1,width,1)
+  GuiImage( gui, id_start+3, x,y, "mods/DetailedInformation/gui/text_board.png", 1,1,height)
+  GuiImage( gui, id_start+2, x+1,y+height, "mods/DetailedInformation/gui/text_board.png", 1,width,1)
+  GuiImage( gui, id_start+4, x+width,y+1, "mods/DetailedInformation/gui/text_board.png", 1,1,height)
+  GuiImage( gui, id_start+5, x,y+height, "mods/DetailedInformation/gui/text_corner.png", 1,1)
+  GuiImage( gui, id_start+6, x+width,y, "mods/DetailedInformation/gui/text_corner.png", 1,1)
   GuiZSet( gui, 0 )
 end
 
@@ -138,7 +146,7 @@ function get_detailed_info(creature_id)
   if damagemodel~= nil then
     for _,damage_type in ipairs(res_list) do
       local res = ComponentObjectGetValue2(  damagemodel,"damage_multipliers", damage_type )
-      if math.abs(res -1) >0.01 then
+      if math.abs(res -1) >0.001 then
         table.insert(detailed_info.res,{type = damage_type,value = res})
       end
     end
@@ -154,24 +162,35 @@ function get_detailed_info(creature_id)
 end
 
 --line height: 5+4,box height = 9* lines
-function draw_info(x,y,info)
+function draw_info(x,y,info,id)
   if info.name == "Dead" then
-    draw_text_box(x+5,y+5,40, 15)
+    draw_text_box_info(x+5,y+5,40, 15,id)
     GuiText( gui, x+10,y+10, GameTextGet("$creature_is_dead"))
     return
   end
   if info.is_detailed_info == false then
     local line1 = info.name .. "  ".. tostring(math.floor(info.hp) ).."/"..tostring(math.floor(info.max_hp))
-    local line2 = GameTextGet("$input_mouseright")
+    local line2 = ""
+    local hotkey_setting = ModSettingGet("DetailedInformation.select_hotkey")
+    if hotkey_setting =="right_click2" then
+      line2 = GameTextGet("$interact_mark_enemy", GameTextGet("$input_mouseright"))
+    elseif hotkey_setting =="right_click" then
+      line2 = GameTextGet("$interact_mark_enemy", GameTextGet("$input_mouseright"))
+    elseif hotkey_setting =="interact" then
+      line2 = GameTextGet("$interact_mark_enemy","E")
+    end
     local width = math.max(string.len(line1),string.len(line2))*5 + 10
-    draw_text_box(x+5,y+5,width,27)
+    --TODO
+    if GameTextGetTranslatedOrNot("$current_language") == "русский" then
+      width =  math.max(string.len(line1),string.len(line2))*3 + 10
+    end
+    draw_text_box_info(x+5,y+5,width,27,id+1700)
     GuiText( gui, x+10,y+9,line1 )
     GuiText( gui, x+10,y+18,line2 )
   else
     GuiZSet( gui, 0 )
     local line1 = info.name --name
     local line2 = GameTextGet("$creature_hp")..":  "..string.format("%.2f",info.hp) .."/"..string.format("%.2f",info.max_hp) --detailed hp
-
     --box
 
     --name
@@ -188,15 +207,37 @@ function draw_info(x,y,info)
     if #(info.protect) == 0 then
       current_y = 31
     end
-        GuiText( gui, x+10,y+ current_y,GameTextGet("$damage_multipliers")..":")
+    GuiText( gui, x+10,y+ current_y,GameTextGet("$damage_multipliers")..":")
     current_y = current_y + 9
+
+    local res_type_space = 55
+    if GameTextGetTranslatedOrNot("$current_language") == "русский" then
+      res_type_space = 75
+      for i,resistance in pairs(info.res) do
+        if resistance.type == "physics_hit" then
+          res_type_space = 95
+          break
+        end
+      end
+    end
+
     for i,resistance in pairs(info.res) do
-      GuiText( gui, x+15,y+ current_y,GameTextGet(res_local_key[resistance.type]))
-      GuiText( gui, x+15 + 55,y+ current_y,"x"..string.format("%.2f",resistance.value*100).."%")
+      local res_name =GameTextGet(res_local_key[resistance.type])
+      GuiText( gui, x+15,y+ current_y,res_name)
+      local text_res = string.format(res_number_format,resistance.value*100)
+      if ModSettingGet("DetailedInformation.percentage")~=true then
+        text_res = string.format(res_number_format,resistance.value)
+      else
+        text_res = text_res.."%"
+      end
+      if ModSettingGet("DetailedInformation.multiplication")==true then
+        text_res = "x"..text_res
+      end
+      GuiText( gui, x+15 +  res_type_space,y+ current_y,text_res)
       current_y = current_y +9
     end
     GuiZSet( gui, 0 )
-    draw_text_box(x+5,y+5,140, current_y +4)
+    draw_text_box_info(x+5,y+5,85 +  res_type_space, current_y +4,id+1900)
   end
 end
 
@@ -204,7 +245,6 @@ function _info_gui_main(mouse_gui_x,mouse_gui_y,creature_id)
   if GameIsInventoryOpen() then
     return
   end
-  if info_enabled == false then return end
 
   local screen_width,screen_height = GuiGetScreenDimensions( gui )
   local marked_enemy = tonumber(GlobalsGetValue("MARKED_CREATURE", "0" ))
@@ -212,16 +252,17 @@ function _info_gui_main(mouse_gui_x,mouse_gui_y,creature_id)
     --update mouse pos creature info
     local x,y=mouse_gui_x * screen_width/1280  , mouse_gui_y * screen_height/720
     local info = get_detailed_info(marked_enemy)
-    draw_info(x,y,info)
+    draw_info(x,y,info,587945)
   elseif creature_id >0 then
     --update marked_enemy info
-    local x,y=mouse_gui_x * screen_width/1280  , mouse_gui_y * screen_height/720
-    local info = get_brief_info(creature_id)
-    draw_info(x,y,info)
+    if ModSettingGet("DetailedInformation.panel_enable") then
+      local x,y=mouse_gui_x * screen_width/1280  , mouse_gui_y * screen_height/720
+      local info = get_brief_info(creature_id)
+      draw_info(x,y,info,878965)
+    end
   end
 
   if gui ~= nil then
     GuiStartFrame( gui )
   end
-
 end
