@@ -27,7 +27,7 @@ local translate = {
 	},
 	["interact key('E' by default) "] = {
 		english ="interact key('E' by default) ",
-		russian = "клавиша взаимодействия (по умолчанию «E»)",
+		russian = "кл. взаимодействия (по умолч. «E»)",
 		chinese = "互动键（默认是E键）",
 	},
 
@@ -43,7 +43,7 @@ local translate = {
 	},
 	["Enable brief information panel."] = {
 		english ="Enable this mod's brief information panel. Quick switch with a shortcut key(double right click by default)",
-		russian = "Включить панель краткой информации этого мода. Быстрое переключение с помощью клавиши быстрого доступа (двойной щелчок правой кнопкой мыши по умолчанию)",
+		russian = "Панель краткой информации этого мода. Быстрое перекл. с помощью кл. быстрого доступа (по умолч. двойной щелчок ПКМ)",
 		chinese = "开启未选中敌人时的简要信息栏。此设置可以通过快捷键快捷切换开关状态（默认双击右键）。",
 	},
 	["brief panel hotkey"] = {
@@ -53,17 +53,17 @@ local translate = {
 	},
 	["Change brief panel hotkey"] = {
 		english ="Change the hot key corresponding to the brief panel switch.",
-		russian = "Смена горячей клавиши, соответствующую переключению панели информации.",
+		russian = "Смена горячей клавиши, соответствующей переключению панели информации.",
 		chinese = "改变快捷切换简要信息打开状态所用的快捷。",
 	},
 	["double interact key('E' by default) "] = {
 		english ="double interact key('E' by default) ",
-		russian = "двойная клавиша взаимодействия (по умолчанию «E»)",
+		russian = "двойная кл. вэаимод. (по умолч. «E»)",
 		chinese = "双击互动键（默认E键）",
 	},
 	["disable the hot key"] = {
 		english ="disable the hot key",
-		russian = "отключение горячей клавиши",
+		russian = "отключено",
 		chinese = "取消这个快捷键",
 	},
 	["percentage value"] = {
